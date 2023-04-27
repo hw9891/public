@@ -1,3 +1,6 @@
 # pronhub
 66.254.114.41
 205.185.208.142
+
+# www.twitch.tv www.twitch.tv
+151.101.78.167
