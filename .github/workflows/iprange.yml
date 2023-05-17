@@ -32,7 +32,7 @@ jobs:
       - name: download iprange
         run:  | 
           curl -s https://core.telegram.org/resources/cidr.txt > iprange/telegram.txt
-          curl -s https://www.gstatic.com/ipranges/goog.txt > iprange/goog.txt
+          curl -s https://www.gstatic.com/ipranges/goog.txt > iprange/google.txt
 
 
       - name: Commit files
