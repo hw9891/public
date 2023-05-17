@@ -33,4 +33,28 @@ jobs:
         run:  | 
           curl -s https://core.telegram.org/resources/cidr.txt > iprange/telegram.txt
           curl -s https://www.gstatic.com/ipranges/goog.txt > iprange/goog.txt
-          ls -la
+
+
+      - name: Commit files
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          git remote add github "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git pull github ${GITHUB_REF} --ff-only
+
+          # Get name & email from 1st commit
+          git config --local user.email "$(git log --format='%ae' --reverse | head -1)"
+          git config --local user.name "$(git log --format='%an' --reverse | head -1)"
+
+          # try commit
+          git add .
+          if [ -z "$(git status --porcelain)" ]; then
+            echo 'No changes'
+            exit 0
+          fi
+          git commit -m "Auto-update ip ranges"
+
+          # push changes
+          git push github HEAD:${GITHUB_REF}
