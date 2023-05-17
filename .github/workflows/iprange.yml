@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: update-iprange
 
 # Controls when the workflow will run
 on:
@@ -32,7 +32,7 @@ jobs:
       - name: download iprange
         run:  | 
           curl -s https://core.telegram.org/resources/cidr.txt > iprange/telegram.txt
-          curl -s https://www.gstatic.com/ipranges/goog.txt > iprange/google.txt
+          # curl -s https://www.gstatic.com/ipranges/goog.txt > iprange/google.txt
 
 
       - name: Commit files
